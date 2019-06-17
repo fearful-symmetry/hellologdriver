@@ -31,6 +31,7 @@ func newLogger(file string) (HelloLogger, error) {
 
 func (logger *HelloLogger) consumeLogs() {
 	reader := pb.NewUint32DelimitedReader(logger.logFile, binary.BigEndian, 2e6)
+	defer reader.Close()
 	var log logdriver.LogEntry
 	for {
 		err := reader.ReadMsg(&log)
@@ -44,7 +45,5 @@ func (logger *HelloLogger) consumeLogs() {
 		fmt.Fprintf(os.Stderr, "Got log line: %s\n", log.Line)
 		log.Reset()
 	}
-
-	reader.Close()
 
 }
