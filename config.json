@@ -1,0 +1,12 @@
+{
+    "description": "A little example log driver for docker",
+    "documentation": "https://docs.docker.com/engine/extend/plugin_api/",
+    "entrypoint": ["/usr/bin/hellologdriver"],
+    "network": {
+      "type": "host"
+    },
+    "interface": {
+      "types": ["docker.logdriver/1.0"],
+      "socket": "hellologdriver.sock"
+    }
+  }
